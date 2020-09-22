@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, Fragment } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { RootState } from "types/RootState";
 import { topbarStyles } from "config/styles";
 import { isUserLoggedInSelector } from "state/app/selectors";
 import { LoginButton } from "components/common/LoginButton";
+import { LoginRegisterModal } from "components/LoginRegisterModal/LoginRegisterModal";
 
 const TopbarContainer = styled.div`
   background-color: ${topbarStyles.backgroundColor};
@@ -32,13 +33,25 @@ interface TopBarProps {
 }
 
 const Topbar = (props: TopBarProps) => {
+  const [isLoginRegisterModalOpen, setLoginRegisterModalOpen] = useState(false);
+
+  const toggleLoginRegisterModal = () => {
+    setLoginRegisterModalOpen(!isLoginRegisterModalOpen);
+  };
+
   return (
-    <TopbarContainer>
-      <TopbarLabel>CODYPASTE</TopbarLabel>
-      <AccountBox>
-        <LoginButton></LoginButton>
-      </AccountBox>
-    </TopbarContainer>
+    <Fragment>
+      <LoginRegisterModal
+        isOpen={isLoginRegisterModalOpen}
+        handleOnClose={toggleLoginRegisterModal}
+      />
+      <TopbarContainer>
+        <TopbarLabel>CODYPASTE</TopbarLabel>
+        <AccountBox>
+          <LoginButton onClick={toggleLoginRegisterModal}></LoginButton>
+        </AccountBox>
+      </TopbarContainer>
+    </Fragment>
   );
 };
 

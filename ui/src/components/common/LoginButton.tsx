@@ -27,9 +27,13 @@ const LoginButtonContainer = styled.button`
   }
 `;
 
-export const LoginButton = () => {
+interface LoginButtonProps {
+  onClick: () => void;
+}
+
+export const LoginButton = ({ onClick }: LoginButtonProps) => {
   return (
-    <LoginButtonContainer>
+    <LoginButtonContainer onClick={onClick}>
       <LoginButtonLabel>Login</LoginButtonLabel>
     </LoginButtonContainer>
   );
