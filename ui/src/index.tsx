@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createGlobalStyle } from "styled-components";
-import { ThemeProvider } from "@chakra-ui/core";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -16,9 +15,7 @@ body {
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

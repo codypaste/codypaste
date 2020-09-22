@@ -20,6 +20,7 @@ const LoginButtonContainer = styled.button`
 
   :hover {
     cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 1);
     ${LoginButtonLabel} {
       color: #fff;
     }
