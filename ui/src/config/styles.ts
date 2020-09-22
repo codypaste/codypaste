@@ -1,11 +1,16 @@
-export const styleVariables = {
-  primaryTextColor: "#7952b3",
-  primaryBackgroundColor: "#f0f3f5",
+const colors = {
+  cornflowerBlue: "#7C79FF",
+  white: '#FFFFFF'
+};
 
-  mediaBreakpoints: {
-    small: "576px",
-    medium: "768px",
-    large: "992px",
-    xlarge: "1200px",
-  },
+export const mediaBreakpoints = {
+  small: "576px",
+  medium: "768px",
+  large: "992px",
+  xlarge: "1200px",
+};
+
+export const topbarStyles = {
+  backgroundColor: colors.cornflowerBlue,
+  labelColor: 'rgba(255, 255, 255, 0.8)',
 };
