@@ -1,0 +1,8 @@
+{
+  "name": "codypaste",
+  "version": "1.0.0",
+  "repository": "git@github.com:codypaste/codypaste.git",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["ui", "service"]
+}
