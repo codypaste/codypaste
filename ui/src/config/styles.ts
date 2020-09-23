@@ -1,5 +1,5 @@
 const colors = {
-  cornflowerBlue: "#7C79FF",
+  cornflowerBlue: "#1d3557",
   white: '#FFFFFF'
 };
 

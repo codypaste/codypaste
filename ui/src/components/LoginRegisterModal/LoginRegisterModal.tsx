@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
+import { Button } from "@chakra-ui/core";
 import "components/LoginRegisterModal/LoginRegisterModal.scss";
 
 interface LoginRegisterModalProps {
@@ -23,7 +24,7 @@ export const LoginRegisterModal = ({
         <button>tab navigation</button>
         <button>stays</button>
         <button>inside</button>
-        <button>the modal</button>
+        <Button variantColor="purple">Button</Button>
       </form>
     </Modal>
   );

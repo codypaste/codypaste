@@ -1,10 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createGlobalStyle } from "styled-components";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 const GlobalStyle = createGlobalStyle`
+html {
+  font-size: 16px;
+};
+
 body {
   margin: 0;
   padding: 0;
@@ -15,7 +20,10 @@ body {
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-    <App />
+    <ThemeProvider>
+      <CSSReset />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
