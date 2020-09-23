@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createGlobalStyle } from "styled-components";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import "tippy.js/dist/tippy.css";
 import { appStyles } from "config/styles";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
