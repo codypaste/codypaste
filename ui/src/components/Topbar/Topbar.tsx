@@ -2,7 +2,8 @@ import React, { useState, Fragment } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { RootState } from "types/RootState";
-import { topbarStyles } from "config/styles";
+import { topbarStyles, mediaBreakpoints } from "config/styles";
+import { MODAL_TYPES, ModalValues } from "config/modals";
 import { isUserLoggedInSelector } from "state/app/selectors";
 import { SignInButton } from "components/common/SignInButton";
 import { SignUpButton } from "components/common/SignUpButton";
@@ -19,17 +20,27 @@ const TopbarContainer = styled.div`
 const TopbarLabel = styled.span`
   color: ${topbarStyles.labelColor};
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1rem;
   grid-area: label;
-  margin-inline-start: 4rem;
+  margin-inline-start: 1rem;
+
+  @media only screen and (min-width: ${mediaBreakpoints.xlarge}) {
+    margin-inline-start: 4rem;
+    font-size: 2rem;
+  }
 `;
 
 const AccountBox = styled.div`
   grid-area: account;
-  margin-inline-end: 4rem;
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 0.5rem;
   grid-template-columns: auto auto;
+  margin-inline-end: 1rem;
+
+  @media only screen and (min-width: ${mediaBreakpoints.xlarge}) {
+    margin-inline-end: 4rem;
+    grid-gap: 1rem;
+  }
 `;
 
 interface TopBarProps {
@@ -37,23 +48,34 @@ interface TopBarProps {
 }
 
 const Topbar = (props: TopBarProps) => {
-  const [isLoginRegisterModalOpen, setLoginRegisterModalOpen] = useState(false);
+  const [openedModalType, setOpenedModalType] = useState<
+    ModalValues | undefined
+  >();
 
-  const toggleLoginRegisterModal = () => {
-    setLoginRegisterModalOpen(!isLoginRegisterModalOpen);
+  const openLoginModal = () => {
+    setOpenedModalType(MODAL_TYPES.LOGIN_MODAL);
+  };
+
+  const openRegisterModal = () => {
+    setOpenedModalType(MODAL_TYPES.REGISTER_MODAL);
+  };
+
+  const closeModal = () => {
+    setOpenedModalType(undefined);
   };
 
   return (
     <Fragment>
       <LoginRegisterModal
-        isOpen={isLoginRegisterModalOpen}
-        handleOnClose={toggleLoginRegisterModal}
+        isOpen={openedModalType !== undefined}
+        handleOnClose={closeModal}
+        modalType={openedModalType}
       />
       <TopbarContainer>
         <TopbarLabel>CODYPASTE</TopbarLabel>
         <AccountBox>
-          <SignInButton onClick={toggleLoginRegisterModal}></SignInButton>
-          <SignUpButton onClick={() => {}} />
+          <SignInButton onClick={openLoginModal}></SignInButton>
+          <SignUpButton onClick={openRegisterModal} />
         </AccountBox>
       </TopbarContainer>
     </Fragment>

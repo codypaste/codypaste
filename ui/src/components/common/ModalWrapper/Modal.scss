@@ -1,0 +1,45 @@
+.ReactModal__Overlay__LoginRegister {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.ReactModal__Content__LoginRegister {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5%;
+  width: 95%;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  outline: none;
+  padding: 0;
+}
+
+/* Extra small devices (phones, 576px and down) */
+@media only screen and (max-width: 576px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1200px) {
+  .ReactModal__Content__LoginRegister {
+    top: 20%;
+    width: 40rem;
+  }
+}
