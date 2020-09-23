@@ -1,7 +1,7 @@
-import Topbar from "components/Topbar/Topbar";
 import React from "react";
-import { RouteProps } from "react-router-dom";
 import styled from "styled-components";
+import { RouteProps } from "react-router-dom";
+import { DefaultPageWrapper } from "components/common/DefaultPageWrapper";
 
 interface EditorViewProps extends RouteProps {}
 
@@ -10,7 +10,9 @@ const EditorViewContainer = styled.div`
 `;
 
 export const EditorView = (props: EditorViewProps) => {
-  return <EditorViewContainer>
-      <Topbar></Topbar>
-  </EditorViewContainer>;
+  return (
+    <DefaultPageWrapper>
+      <EditorViewContainer></EditorViewContainer>
+    </DefaultPageWrapper>
+  );
 };
