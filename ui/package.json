@@ -164,6 +164,18 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "babel-plugin-styled-components",
+        {
+          "displayName": true,
+          "fileName": true
+        }
+      ]
     ]
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.11.1"
   }
 }
