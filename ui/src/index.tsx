@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createGlobalStyle } from "styled-components";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { appStyles } from "config/styles";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -14,6 +15,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
+  background-color: ${appStyles.bgColor}
 }
 `;
 

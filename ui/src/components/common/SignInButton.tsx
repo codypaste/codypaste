@@ -2,19 +2,19 @@ import React from "react";
 import { Button } from "@chakra-ui/core";
 import { BiLogIn } from "react-icons/bi";
 
-interface LoginButtonProps {
+interface SignInButtonProps {
   onClick: () => void;
 }
 
-export const LoginButton = ({ onClick }: LoginButtonProps) => {
+export const SignInButton = ({ onClick }: SignInButtonProps) => {
   return (
     <Button
       leftIcon={BiLogIn}
       variant="solid"
-      variantColor="red"
+      variantColor="white"
       onClick={onClick}
     >
-      <span>Login</span>
+      <span>Sign in</span>
     </Button>
   );
 };

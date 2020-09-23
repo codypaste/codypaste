@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { RootState } from "types/RootState";
 import { topbarStyles } from "config/styles";
 import { isUserLoggedInSelector } from "state/app/selectors";
-import { LoginButton } from "components/common/LoginButton";
+import { SignInButton } from "components/common/SignInButton";
+import { SignUpButton } from "components/common/SignUpButton";
 import { LoginRegisterModal } from "components/LoginRegisterModal/LoginRegisterModal";
 
 const TopbarContainer = styled.div`
@@ -26,6 +27,9 @@ const TopbarLabel = styled.span`
 const AccountBox = styled.div`
   grid-area: account;
   margin-inline-end: 4rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: auto auto;
 `;
 
 interface TopBarProps {
@@ -48,7 +52,8 @@ const Topbar = (props: TopBarProps) => {
       <TopbarContainer>
         <TopbarLabel>CODYPASTE</TopbarLabel>
         <AccountBox>
-          <LoginButton onClick={toggleLoginRegisterModal}></LoginButton>
+          <SignInButton onClick={toggleLoginRegisterModal}></SignInButton>
+          <SignUpButton onClick={() => {}} />
         </AccountBox>
       </TopbarContainer>
     </Fragment>

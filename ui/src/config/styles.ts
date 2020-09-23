@@ -1,6 +1,12 @@
 const colors = {
-  cornflowerBlue: "#1d3557",
-  white: '#FFFFFF'
+  cornflowerBlue: "#7C79FF",
+  white: "#FFFFFF",
+  cello: "#1d3557",
+  gallery: "#EEEEEE",
+};
+
+export const appStyles = {
+  bgColor: colors.gallery,
 };
 
 export const mediaBreakpoints = {
@@ -11,6 +17,6 @@ export const mediaBreakpoints = {
 };
 
 export const topbarStyles = {
-  backgroundColor: colors.cornflowerBlue,
-  labelColor: 'rgba(255, 255, 255, 0.8)',
+  backgroundColor: colors.cello,
+  labelColor: "rgba(255, 255, 255, 0.8)",
 };
