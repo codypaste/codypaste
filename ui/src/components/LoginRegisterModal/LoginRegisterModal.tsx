@@ -1,5 +1,5 @@
 import React from "react";
-import { MODAL_TYPES, ModalValues } from "config/modals";
+import { MODAL_TYPES, ModalValues } from "config/constants";
 import { ModalWrapper } from "components/common/ModalWrapper/Modal";
 import { LoginForm } from "components/LoginRegisterModal/LoginForm";
 import { RegisterForm } from "components/LoginRegisterModal/RegisterForm";

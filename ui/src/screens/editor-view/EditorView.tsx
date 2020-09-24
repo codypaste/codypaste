@@ -8,7 +8,7 @@ interface EditorViewProps extends RouteProps {}
 
 const EditorViewContainer = styled.div`
   display: grid;
-  grid-template: "editors-list editor share" 1fr / 1fr 5fr 1fr;
+  grid-template: "editors-list editor share" 1fr / minmax(300px, 1fr) 5fr 1fr;
   margin-inline-start: 4rem;
 `;
 

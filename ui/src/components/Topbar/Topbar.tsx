@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { RootState } from "types/RootState";
 import { topbarStyles, mediaBreakpoints } from "config/styles";
-import { MODAL_TYPES, ModalValues } from "config/modals";
+import { MODAL_TYPES, ModalValues } from "config/constants";
 import { isUserLoggedInSelector } from "state/app/selectors";
 import { SignInButton } from "components/common/SignInButton";
 import { SignUpButton } from "components/common/SignUpButton";
