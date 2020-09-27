@@ -61,7 +61,7 @@ export const ShareCenter = () => {
           <FormLabel htmlFor="deleteAfter">Delete after</FormLabel>
           <Select id="deleteAfter">
             <option value="option1">Never - keep forever</option>
-            <option value="option1">After reading</option>
+            <option value="option1">Delete on first visit</option>
             <option value="option2">5 minutes</option>
             <option value="option3">15 minutes</option>
             <option value="option3">1 hour</option>
