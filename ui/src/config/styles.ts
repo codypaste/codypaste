@@ -3,6 +3,9 @@ const colors = {
   white: "#FFFFFF",
   cello: "#1d3557",
   gallery: "#EEEEEE",
+  codGray: "#111111",
+  ebonyClay: "#1e212f",
+  brightGray: "#34384C",
 };
 
 export const appStyles = {
@@ -17,6 +20,14 @@ export const mediaBreakpoints = {
 };
 
 export const topbarStyles = {
-  backgroundColor: colors.cello,
+  backgroundColor: colors.brightGray,
   labelColor: "rgba(255, 255, 255, 0.8)",
+};
+
+export const sidebarStyles = {
+  backgroundColor: colors.brightGray,
+};
+
+export const editorListStyles = {
+  backgroundColor: colors.ebonyClay,
 };

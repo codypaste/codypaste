@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { RootState } from "types/RootState";
 import { topbarStyles, mediaBreakpoints } from "config/styles";
-import { MODAL_TYPES, ModalValues } from "config/modals";
+import { MODAL_TYPES, ModalValues } from "config/constants";
 import { isUserLoggedInSelector } from "state/app/selectors";
 import { SignInButton } from "components/common/SignInButton";
 import { SignUpButton } from "components/common/SignUpButton";
@@ -22,10 +22,10 @@ const TopbarLabel = styled.span`
   font-weight: bold;
   font-size: 1rem;
   grid-area: label;
-  margin-inline-start: 1rem;
+  margin-inline-start: 0.2rem;
 
   @media only screen and (min-width: ${mediaBreakpoints.xlarge}) {
-    margin-inline-start: 4rem;
+    margin-inline-start: 0.5rem;
     font-size: 2rem;
   }
 `;
