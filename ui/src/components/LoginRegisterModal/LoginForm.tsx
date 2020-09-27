@@ -69,7 +69,6 @@ export const LoginForm = () => {
   };
 
   const hasErrors = Object.keys(errors).length > 0;
-  console.log(errors);
 
   return (
     <LoginFormContainer>

@@ -38,7 +38,6 @@ const AccountBox = styled.div`
   margin-inline-end: 1rem;
 
   @media only screen and (min-width: ${mediaBreakpoints.xlarge}) {
-    margin-inline-end: 4rem;
     grid-gap: 1rem;
   }
 `;
