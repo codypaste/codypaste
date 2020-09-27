@@ -9,7 +9,7 @@ import { SmallHoverIconButton } from "components/common/HoverIconButton";
 
 const EditorListContainer = styled.div`
   background-color: ${editorListStyles.backgroundColor};
-  height: 100vh;
+  height: 100%;
 `;
 
 const EditorListHeaderContainer = styled.div`

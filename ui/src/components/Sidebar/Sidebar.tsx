@@ -8,6 +8,7 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  padding-block-start: 4rem;
 `;
 
 const SidebarEntry = styled.div`

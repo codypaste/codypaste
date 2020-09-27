@@ -23,7 +23,6 @@ const SidebarWrapper = styled.div`
   grid-area: sidebar;
   background-color: #eee;
   width: 4rem;
-  padding-block-start: 4rem;
   background-color: ${sidebarStyles.backgroundColor};
 `;
 
