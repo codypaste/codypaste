@@ -19,19 +19,22 @@ const TitleContainer = styled.div<TitleContainerProps>`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: #fff;
+  font-size: 0.8rem;
 `;
 
 const BigIconButton = styled(IconButton)`
   opacity: 0;
   svg {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 `;
 
 const EditorBoxContainer = styled.div`
   width: 100%;
-  height: 4rem;
+  height: 3rem;
+  padding-inline-start: 1rem;
 
   display: grid;
   grid-template:
@@ -41,11 +44,7 @@ const EditorBoxContainer = styled.div`
 
   :hover {
     cursor: pointer;
-    font-weight: bold;
-    ${TitleContainer} {
-      font-weight: bold;
-    }
-
+    background-color: rgba(255, 255, 255, 0.1);
     ${BigIconButton} {
       opacity: 1;
     }
@@ -94,7 +93,7 @@ export const EditorBox = ({ type, title, isActive }: EditorBoxProps) => {
   return (
     <EditorBoxContainer>
       <IconContainer>
-        <Box as={icon} size="32px" />
+        <Box as={icon} size="24px" color="#fff" />
       </IconContainer>
       <TitleContainer active={isActive}>{title}</TitleContainer>
       <MenuContainer>
@@ -107,6 +106,7 @@ export const EditorBox = ({ type, title, isActive }: EditorBoxProps) => {
           onClickOutside={hide}
         >
           <BigIconButton
+            color="#fff"
             onClick={visible ? hide : show}
             isRound
             variant="ghost"

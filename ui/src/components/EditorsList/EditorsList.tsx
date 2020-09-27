@@ -3,11 +3,13 @@ import styled from "styled-components";
 import { BiPlus } from "react-icons/bi";
 import { Button } from "@chakra-ui/core";
 import { EDITOR_TYPES } from "config/constants";
+import { editorListStyles } from "config/styles";
 import { EditorBox } from "components/EditorsList/EditorBox";
+import { SmallHoverIconButton } from "components/common/HoverIconButton";
 
 const EditorListContainer = styled.div`
-  display: grid;
-  margin-block-start: 1rem;
+  background-color: ${editorListStyles.backgroundColor};
+  height: 100vh;
 `;
 
 const EditorListHeaderContainer = styled.div`
@@ -18,12 +20,13 @@ const EditorListHeaderContainer = styled.div`
 const EditorListTitle = styled.span`
   grid-area: title;
   font-family: "Oswald";
-  font-size: 2rem;
-  color: rgba(0, 0, 0, 0, 0.8);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
   align-self: center;
+  padding-inline-start: 1rem;
 `;
 
-const AddMoreButton = styled(Button)`
+const AddMoreButton = styled(SmallHoverIconButton)`
   align-self: center;
 `;
 
@@ -33,13 +36,12 @@ export const EditorList = () => {
       <EditorListHeaderContainer>
         <EditorListTitle>All your editors</EditorListTitle>
         <AddMoreButton
-          leftIcon={BiPlus}
-          variant="solid"
-          variantColor="red"
+          aria-label="Add more"
+          icon={BiPlus}
+          variant="ghost"
+          variantColor="white"
           onClick={() => {}}
-        >
-          <span>Add</span>
-        </AddMoreButton>
+        ></AddMoreButton>
       </EditorListHeaderContainer>
       <EditorBox
         isActive
