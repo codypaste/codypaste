@@ -1,0 +1,8 @@
+test/
+logs/*
+node_modules/
+
+.eslintignore
+.eslintrc.json
+.prettierrc
+package-lock.json

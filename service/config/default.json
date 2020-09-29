@@ -1,0 +1,15 @@
+{
+  "service": {
+    "port": 8080,
+    "jwtSecret": "3DCC69B872DE45D9C6872AE54F89FD1ED8BC1BF2AA59E67BC32AFAA97A63F692"
+  },
+  "database": {
+    "connectionString": "example_conn_string"
+  },
+  "facebook": {
+    "clientId": "",
+    "clientSecret": "",
+    "accessTokenApiUrl": "",
+    "userDataApi": ""
+  }
+}

@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  codypaste_service:
+    build: .
+    ports:
+    - "3000:3000"
+    environment:
+      ENVIRONMENT: development
+    volumes:
+    - ./logs:/usr/src/app/logs
+    - .:/usr/src/app
+    command: ["sh", "-c", "npm start"]
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: codypaste-develop
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres:
