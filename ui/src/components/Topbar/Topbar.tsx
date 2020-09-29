@@ -11,7 +11,7 @@ import { LoginRegisterModal } from "components/LoginRegisterModal/LoginRegisterM
 
 const TopbarContainer = styled.div`
   background-color: ${topbarStyles.backgroundColor};
-  height: 4rem;
+  height: ${topbarStyles.height};
   display: grid;
   grid-template: "label . account" auto / auto 1fr auto;
   align-items: center;

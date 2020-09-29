@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { BiPlus } from "react-icons/bi";
-import { Button } from "@chakra-ui/core";
 import { EDITOR_TYPES } from "config/constants";
 import { editorListStyles } from "config/styles";
 import { EditorBox } from "components/EditorsList/EditorBox";
