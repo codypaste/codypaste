@@ -5,9 +5,7 @@ exports.up = function (knex) {
   return knex.schema
     .createTable(TABLES.USERS, (usersTable) => {
       usersTable.increments('userId').primary();
-      usersTable.bigInteger('authProviderId');
-      usersTable.text('picture');
-      usersTable.string('name', 60);
+      usersTable.string('username', 60);
       usersTable.string('firstName', 30);
       usersTable.string('lastName', 30);
       usersTable.string('email', 50);

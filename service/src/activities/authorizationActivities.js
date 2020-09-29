@@ -25,6 +25,13 @@ module.exports = (usersDao) => {
     };
   };
 
+  /*
+    Example payload:
+    {
+      "username": "test_user",
+      "email": "test_user@examplemail.com"
+    }
+  */
   const basicAuthorization = async (userData) => {
     const userId = await usersDao.createNewUserIfNotExists(userData);
     const user = Object.assign({}, userData, { userId });

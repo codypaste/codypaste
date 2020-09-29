@@ -24,10 +24,15 @@ const basicAuth = async (ctx, next) => {
   const { body: userData } = ctx.request;
 
   const { user, token } = await authorizationActivities.basicAuthorization(userData);
-  ctx.body = user;
+  ctx.body = {
+    user,
+    token,
+  };
+
   ctx.cookies.set(AUTH_TOKEN_COOKIE, token, {
     maxAge: 86400000, // 1 day
   });
+
   return next();
 };
 
