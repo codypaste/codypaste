@@ -21,6 +21,7 @@ const FormControlWithMargin = styled(FormControl)`
 
 const ShareCenterContainer = styled.div`
   padding: 1rem;
+  padding-inline-start: 0;
   height: 100%;
 `;
 

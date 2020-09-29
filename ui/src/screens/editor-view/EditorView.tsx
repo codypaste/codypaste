@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 import { RouteProps } from "react-router-dom";
 import { DefaultPageWrapper } from "components/common/DefaultPageWrapper";
 import { EditorList } from "components/EditorsList/EditorsList";
 import { ShareCenter } from "components/ShareCenter/ShareCenter";
-import { CodeEditor } from "components/CodeEditor/CodeEditor";
+
+const CodeEditor = React.lazy(() => import("components/CodeEditor/CodeEditor"));
 
 interface EditorViewProps extends RouteProps {}
 
@@ -37,7 +38,9 @@ export const EditorView = (props: EditorViewProps) => {
           <EditorList />
         </EditorsListContainer>
         <EditorContainer>
-          <CodeEditor></CodeEditor>
+          <Suspense fallback={<div>Loading...</div>}>
+            <CodeEditor />
+          </Suspense>
         </EditorContainer>
         <ShareContainter>
           <ShareCenter></ShareCenter>

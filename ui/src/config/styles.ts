@@ -22,6 +22,7 @@ export const mediaBreakpoints = {
 export const topbarStyles = {
   backgroundColor: colors.brightGray,
   labelColor: "rgba(255, 255, 255, 0.8)",
+  height: "4rem",
 };
 
 export const sidebarStyles = {

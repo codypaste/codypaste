@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import CodeMirror from "codemirror";
 import styled from "styled-components";
+import { topbarStyles } from "config/styles";
 import "codemirror/lib/codemirror.css";
 import "components/CodeEditor/CodeEditor.scss";
 
 const CodeEditorContainer = styled.div`
   padding: 0.5rem;
-  height: 100%;
+  height: calc(100vh - ${topbarStyles.height});
 `;
 
-export const CodeEditor = () => {
+const CodeEditor = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [codeMirrorInstance, setCodeMirrorInstance] = useState<any>();
   const textAreaRef: any = useRef();
@@ -17,6 +18,7 @@ export const CodeEditor = () => {
   useEffect(() => {
     const codemirror = CodeMirror.fromTextArea(textAreaRef.current, {
       lineNumbers: true,
+      lineWrapping: true,
     });
     setCodeMirrorInstance(codemirror);
   }, []);
@@ -27,3 +29,5 @@ export const CodeEditor = () => {
     </CodeEditorContainer>
   );
 };
+
+export default CodeEditor;
