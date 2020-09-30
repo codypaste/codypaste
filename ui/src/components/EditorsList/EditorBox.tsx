@@ -65,6 +65,7 @@ interface EditorBoxProps {
   type: EditorTypesType;
   title: string;
   isActive?: boolean;
+  id: string;
 }
 
 const getIcon = (type: EditorTypesType): IconType => {
