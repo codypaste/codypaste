@@ -1,0 +1,35 @@
+{
+  "name": "codypaste-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@hapi/joi": "^16.1.8",
+    "@koa/cors": "^3.0.0",
+    "config": "^3.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.2",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "pg": "^7.12.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-mocha": "^5.3.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.1",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "test": "mocha tests/**/*Tests.js",
+    "start": "node index.js"
+  },
+  "author": "DirtyRedBombers",
+  "license": "ISC"
+}
