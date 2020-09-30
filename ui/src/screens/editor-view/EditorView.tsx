@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 import { RouteProps } from "react-router-dom";
 import { DefaultPageWrapper } from "components/common/DefaultPageWrapper";
-import { EditorList } from "components/EditorsList/EditorsList";
+import EditorList from "components/EditorsList/EditorsList";
 import { ShareCenter } from "components/ShareCenter/ShareCenter";
 
 const CodeEditor = React.lazy(() => import("components/CodeEditor/CodeEditor"));
