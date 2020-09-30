@@ -8,6 +8,7 @@ import { SmallHoverIconButton } from "components/common/HoverIconButton";
 import { RootState } from "types/RootState";
 import { getAllEditors } from "state/editors/selectors";
 import { addEditor } from "state/editors/actions";
+import { Button } from "@chakra-ui/core";
 
 const EditorListContainer = styled.div`
   background-color: ${editorListStyles.backgroundColor};
@@ -32,9 +33,26 @@ const AddMoreButton = styled(SmallHoverIconButton)`
   align-self: center;
 `;
 
+const NoEditorsContainer = styled.div`
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+`;
+
 const EditorList = ({ allEditors, addEditor }: Props) => {
   const handleAddMore = () => {
     addEditor({ title: "", type: "" });
+  };
+
+  const NoEditors = () => {
+    return (
+      <NoEditorsContainer>
+        <Button onClick={handleAddMore} variantColor="red">
+          Add editor
+        </Button>
+      </NoEditorsContainer>
+    );
   };
 
   return (
@@ -59,6 +77,7 @@ const EditorList = ({ allEditors, addEditor }: Props) => {
           ></EditorBox>
         );
       })}
+      {allEditors.length === 0 && <NoEditors></NoEditors>}
     </EditorListContainer>
   );
 };
