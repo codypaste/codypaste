@@ -12,7 +12,7 @@
   publish = "ui/build"
 
   # Default build command.
-  command = "yarn workspaces run build"
+  command = "yarn workspace ui run build"
 
   # Directory with the serverless Lambda functions to deploy to AWS.
   # functions = "functions/"
