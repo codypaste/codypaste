@@ -6,3 +6,13 @@ export const getAllEditors = (state: RootState): Editor[] => {
     return state.editors.editorsMap[id];
   });
 };
+
+export const hasAnyEditor = (state: RootState): boolean => {
+  return state.editors.editorsIds.length > 0;
+};
+
+export const getActiveEditor = (state: RootState): Editor => {
+  const activeEditorId = state.editors.activeEditorId;
+  const editor = state.editors.editorsMap[activeEditorId];
+  return editor;
+};

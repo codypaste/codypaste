@@ -4,6 +4,11 @@ import { RouteProps } from "react-router-dom";
 import { DefaultPageWrapper } from "components/common/DefaultPageWrapper";
 import EditorList from "components/EditorsList/EditorsList";
 import { ShareCenter } from "components/ShareCenter/ShareCenter";
+import { EDITOR_TYPES } from "config/constants";
+import { hasAnyEditor, getActiveEditor } from "state/editors/selectors";
+import { RootState } from "types/RootState";
+import { connect, ConnectedProps } from "react-redux";
+import NoEditorBoxes from "components/NoEditorsBoxes/NoEditorBoxes";
 
 const CodeEditor = React.lazy(() => import("components/CodeEditor/CodeEditor"));
 
@@ -30,7 +35,8 @@ const EditorContainer = styled.div`
   height: 100%;
 `;
 
-export const EditorView = (props: EditorViewProps) => {
+export const EditorView = ({ hasAnyEditor, activeEditor }: Props) => {
+  console.log(hasAnyEditor);
   return (
     <DefaultPageWrapper>
       <EditorViewContainer>
@@ -38,14 +44,30 @@ export const EditorView = (props: EditorViewProps) => {
           <EditorList />
         </EditorsListContainer>
         <EditorContainer>
-          <Suspense fallback={<div>Loading...</div>}>
-            <CodeEditor />
-          </Suspense>
+          {!hasAnyEditor && <NoEditorBoxes />}
+          {hasAnyEditor && (
+            <Suspense fallback={<div></div>}>
+              {activeEditor.type === EDITOR_TYPES.CODE && <CodeEditor />}
+            </Suspense>
+          )}
         </EditorContainer>
         <ShareContainter>
-          <ShareCenter></ShareCenter>
+          {hasAnyEditor && <ShareCenter></ShareCenter>}
         </ShareContainter>
       </EditorViewContainer>
     </DefaultPageWrapper>
   );
 };
+
+const mapState = (state: RootState) => {
+  return {
+    hasAnyEditor: hasAnyEditor(state),
+    activeEditor: getActiveEditor(state),
+  };
+};
+const mapDispatch = {};
+const connector = connect(mapState, mapDispatch);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & EditorViewProps;
+
+export default connector(EditorView);

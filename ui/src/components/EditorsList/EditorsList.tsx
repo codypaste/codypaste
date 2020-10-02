@@ -22,7 +22,6 @@ const EditorListHeaderContainer = styled.div`
 
 const EditorListTitle = styled.span`
   grid-area: title;
-  font-family: "Oswald";
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.6);
   align-self: center;
