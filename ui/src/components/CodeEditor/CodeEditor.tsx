@@ -36,7 +36,7 @@ const CodeEditor = ({ content, id, onSave }: CodeEditorProps) => {
 
   // Set value its value
   useEffect(() => {
-    if (codeMirrorInstance) {
+    if (codeMirrorInstance && content !== codeMirrorInstance.getValue()) {
       codeMirrorInstance.setValue(content);
     }
   }, [content, codeMirrorInstance, id]);
