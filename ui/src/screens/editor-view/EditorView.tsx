@@ -9,6 +9,7 @@ import { hasAnyEditor, getActiveEditor } from "state/editors/selectors";
 import { RootState } from "types/RootState";
 import { connect, ConnectedProps } from "react-redux";
 import NoEditorBoxes from "components/NoEditorsBoxes/NoEditorBoxes";
+import { saveEditorContent } from "state/editors/actions";
 
 const CodeEditor = React.lazy(() => import("components/CodeEditor/CodeEditor"));
 
@@ -35,8 +36,20 @@ const EditorContainer = styled.div`
   height: 100%;
 `;
 
-export const EditorView = ({ hasAnyEditor, activeEditor }: Props) => {
-  console.log(hasAnyEditor);
+export const EditorView = ({
+  hasAnyEditor,
+  activeEditor,
+  saveEditorContent,
+}: Props) => {
+  const handleEditorContentSave = (id: string, content: string) => {
+    console.log(activeEditor);
+    if (content !== activeEditor.content) {
+      saveEditorContent({
+        content,
+        editorId: activeEditor.id,
+      });
+    }
+  };
   return (
     <DefaultPageWrapper>
       <EditorViewContainer>
@@ -47,7 +60,13 @@ export const EditorView = ({ hasAnyEditor, activeEditor }: Props) => {
           {!hasAnyEditor && <NoEditorBoxes />}
           {hasAnyEditor && (
             <Suspense fallback={<div></div>}>
-              {activeEditor.type === EDITOR_TYPES.CODE && <CodeEditor />}
+              {activeEditor.type === EDITOR_TYPES.CODE && (
+                <CodeEditor
+                  content={activeEditor.content}
+                  id={activeEditor.id}
+                  onSave={handleEditorContentSave}
+                />
+              )}
             </Suspense>
           )}
         </EditorContainer>
@@ -65,7 +84,9 @@ const mapState = (state: RootState) => {
     activeEditor: getActiveEditor(state),
   };
 };
-const mapDispatch = {};
+const mapDispatch = {
+  saveEditorContent,
+};
 const connector = connect(mapState, mapDispatch);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & EditorViewProps;

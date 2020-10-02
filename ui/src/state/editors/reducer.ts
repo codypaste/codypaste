@@ -1,6 +1,14 @@
 import produce from "immer";
 import { nanoid } from "nanoid";
-import { ADD_EDITOR, EditorsActionTypes } from "state/editors/types";
+import {
+  ADD_EDITOR,
+  SET_ACTIVE_EDITOR,
+  EditorsActionTypes,
+  AddEditorActionType,
+  SetActiveEditorType,
+  SaveEditorContentType,
+  SAVE_EDITOR_CONTENT,
+} from "state/editors/types";
 import { EDITOR_TYPES } from "config/constants";
 import { Editor } from "types/EditorType";
 
@@ -18,7 +26,7 @@ const initialState: EditorsState = {
   activeEditorId: "",
 };
 
-const handleAddEditor = (state: EditorsState, action: EditorsActionTypes) => {
+const handleAddEditor = (state: EditorsState, action: AddEditorActionType) => {
   const id = nanoid();
   const newEditor: Editor = {
     id,
@@ -29,9 +37,18 @@ const handleAddEditor = (state: EditorsState, action: EditorsActionTypes) => {
 
   state.editorsIds.push(id);
   state.editorsMap[id] = newEditor;
-  if (state.editorsIds.length === 1) {
-    state.activeEditorId = id;
-  }
+  state.activeEditorId = id;
+};
+
+const setActiveEditor = (state: EditorsState, action: SetActiveEditorType) => {
+  state.activeEditorId = action.payload;
+};
+
+const hadleSaveEditorContent = (
+  state: EditorsState,
+  action: SaveEditorContentType
+) => {
+  state.editorsMap[action.payload.editorId].content = action.payload.content;
 };
 
 export const editorsReducer = (
@@ -45,6 +62,12 @@ export const editorsReducer = (
   switch (action.type) {
     case ADD_EDITOR: {
       return produce(state, (draft) => handleAddEditor(draft, action));
+    }
+    case SET_ACTIVE_EDITOR: {
+      return produce(state, (draft) => setActiveEditor(draft, action));
+    }
+    case SAVE_EDITOR_CONTENT: {
+      return produce(state, (draft) => hadleSaveEditorContent(draft, action));
     }
     default:
       return state;

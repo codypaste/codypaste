@@ -16,3 +16,8 @@ export const getActiveEditor = (state: RootState): Editor => {
   const editor = state.editors.editorsMap[activeEditorId];
   return editor;
 };
+
+export const getActiveEditorId = (state: RootState): string => {
+  const activeEditorId = state.editors.activeEditorId;
+  return activeEditorId;
+};

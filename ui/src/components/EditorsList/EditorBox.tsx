@@ -6,6 +6,9 @@ import { BiCode, BiDotsHorizontalRounded, BiPen, BiText } from "react-icons/bi";
 import { EditorTypesType, EDITOR_TYPES } from "config/constants";
 import { IconType } from "react-icons/lib";
 import { EditorMenu } from "components/EditorsList/EditorMenu";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "types/RootState";
+import { setActiveEditor } from "state/editors/actions";
 
 interface TitleContainerProps {
   active?: boolean;
@@ -84,7 +87,13 @@ const getIcon = (type: EditorTypesType): IconType => {
   }
 };
 
-export const EditorBox = ({ type, title, isActive }: EditorBoxProps) => {
+export const EditorBox = ({
+  type,
+  title,
+  isActive,
+  id,
+  setActiveEditor,
+}: Props) => {
   const [visible, setVisible] = useState(false);
   const show = () => setVisible(true);
   const hide = () => setVisible(false);
@@ -92,7 +101,11 @@ export const EditorBox = ({ type, title, isActive }: EditorBoxProps) => {
   const icon = getIcon(type);
 
   return (
-    <EditorBoxContainer>
+    <EditorBoxContainer
+      onClick={() => {
+        setActiveEditor(id);
+      }}
+    >
       <IconContainer>
         <Box as={icon} size="24px" color="#fff" />
       </IconContainer>
@@ -120,3 +133,15 @@ export const EditorBox = ({ type, title, isActive }: EditorBoxProps) => {
     </EditorBoxContainer>
   );
 };
+
+const mapState = (state: RootState) => {
+  return {};
+};
+const mapDispatch = {
+  setActiveEditor,
+};
+const connector = connect(mapState, mapDispatch);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & EditorBoxProps;
+
+export default connector(EditorBox);
