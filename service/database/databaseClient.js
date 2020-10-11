@@ -8,6 +8,8 @@ const pgClient = knex(dbConfig[environment]);
 module.exports = {
   TABLES: {
     USERS: 'users',
+    GROUPS: 'groups',
+    SNIPPETS: 'snippets'
   },
   pgClient,
 };
