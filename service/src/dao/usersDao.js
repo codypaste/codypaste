@@ -2,31 +2,46 @@
 const { TABLES, pgClient } = require('../../database/databaseClient');
 const logger = require('../utils/logger');
 
-const findById = async userId => pgClient.select().from(TABLES.USERS).where({ userId });
-
-const createNewUserIfNotExists = async ({
-  email,
-  username,
-  last_name,
-  first_name,
-}) => pgClient.transaction(async (trx) => {
+const getUser = async (
+  query,
+  { excludeUserPass = true } = {},
+) => pgClient.transaction(async (trx) => {
   try {
-    const existingUserId = await trx.select('userId').from(TABLES.USERS).where({ username });
+    const [existingUser] = await trx
+      .select('userId', 'username', 'lastName', 'firstName', 'password', 'email')
+      .from(TABLES.USERS)
+      .where(query);
 
-    if (existingUserId.length) {
-      logger.info(`User ${username} already exists in database. Skipping`);
-      return existingUserId.pop().userId;
+    if (excludeUserPass) {
+      delete existingUser.password;
     }
 
-    const userId = (await trx.insert({
+    return existingUser;
+  } catch (e) {
+    logger.error(`Error from database fetching user data: ${e}`);
+    throw e;
+  }
+});
+
+const createUser = async ({
+  email,
+  username,
+  lastName,
+  firstName,
+  password,
+}) => pgClient.transaction(async (trx) => {
+  try {
+    const user = (await trx.insert({
       email,
       username,
-      firstName: first_name,
-      lastName: last_name,
-    }, 'userId')
+      firstName,
+      lastName,
+      password,
+    })
+      .returning(['userId', 'username', 'lastName', 'firstName', 'email'])
       .into(TABLES.USERS)).pop();
 
-    return userId;
+    return user;
   } catch (e) {
     logger.error(`Error from database while creating user: ${e}`);
     throw e;
@@ -34,6 +49,6 @@ const createNewUserIfNotExists = async ({
 });
 
 module.exports = {
-  createNewUserIfNotExists,
-  findById,
+  getUser,
+  createUser,
 };

@@ -17,13 +17,17 @@ const verifyJwt = async (ctx, next) => {
   if (ctx.user) {
     ctx.status = 200;
   }
+
   return next();
 };
 
 const basicAuth = async (ctx, next) => {
   const { body: userData } = ctx.request;
 
-  const { user, token } = await authorizationActivities.basicAuthorization(userData);
+  const { user, token, createdUser } = await authorizationActivities.basicAuthorization(userData);
+
+  ctx.status = createdUser ? 201 : 200;
+
   ctx.body = {
     user,
     token,

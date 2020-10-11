@@ -1,5 +1,10 @@
+const config = require('config');
+const bcrypt = require('bcryptjs');
+const Boom = require('@hapi/boom');
+
 const facebookService = require('../externalClients/facebookService');
 const jwtUtils = require('../utils/jwtUtils');
+const logger = require('../utils/logger');
 
 const performFacebookAuthorization = async (redirectUrl, code) => {
   const accessToken = await facebookService.getUserAccessToken(redirectUrl, code);
@@ -29,17 +34,46 @@ module.exports = (usersDao) => {
     Example payload:
     {
       "username": "test_user",
-      "email": "test_user@examplemail.com"
+      "email": "test_user@examplemail.com",
+      "password": "some secret"
     }
   */
   const basicAuthorization = async (userData) => {
-    const userId = await usersDao.createNewUserIfNotExists(userData);
-    const user = Object.assign({}, userData, { userId });
-    const token = jwtUtils.signJwt(user);
+    const existingUser = await usersDao.getUser(
+      { username: userData.username },
+      { excludeUserPass: false },
+    );
+
+    if (!existingUser) {
+      logger.info(`Authorizing new user with username: ${userData.username}`);
+
+      const user = await usersDao.createUser(
+        Object.assign({}, userData, {
+          password: await bcrypt.hash(userData.password, await bcrypt.genSalt(config.get('service.saltRounds'))),
+        }),
+      );
+
+      const token = jwtUtils.signJwt(user);
+
+      return {
+        user,
+        token,
+        createdUser: true,
+      };
+    }
+
+    if (!await bcrypt.compare(userData.password, existingUser.password)) {
+      throw Boom.unauthorized(`Invalid password for user ${userData.username}!`);
+    }
+
+    delete existingUser.password;
+
+    const token = jwtUtils.signJwt(existingUser);
 
     return {
-      user,
+      user: existingUser,
       token,
+      createdUser: false,
     };
   };
 

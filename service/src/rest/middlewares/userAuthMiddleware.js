@@ -1,5 +1,7 @@
+const Boom = require('@hapi/boom');
+
 const jwtUtils = require('../../utils/jwtUtils');
-const { findById } = require('../../dao/usersDao');
+const { getUser } = require('../../dao/usersDao');
 const logger = require('../../utils/logger');
 const {
   AUTH_TOKEN_COOKIE,
@@ -30,29 +32,32 @@ exports.userAuthMiddleware = async (ctx, next) => {
   const authToken = getUserToken(ctx);
 
   if (!authToken) {
-    ctx.throw(401, 'Missing authorization token');
+    throw Boom.unauthorized('Missing authorization token');
   }
 
-  let userId;
+  let tokenData;
   try {
-    const tokenData = await jwtUtils.verify(authToken);
-    userId = tokenData.userId;
+    tokenData = await jwtUtils.verify(authToken);
   } catch (e) {
-    ctx.throw(401, 'Invalid token');
+    throw Boom.unauthorized('Invalid token');
   }
 
+  const { userId } = tokenData;
+
   try {
-    const searchResults = await findById(userId);
-    if (!searchResults.length) {
-      ctx.throw(401, 'Unknown user');
+    const user = await getUser({ userId });
+
+    if (!user) {
+      throw Boom.unauthorized('Unknown user');
     }
 
     // adding user data to koa context
-    [ctx.user] = searchResults;
+    ctx.user = user;
     logger.info(`Successfully authorized user with id ${userId}`);
   } catch (e) {
     logger.error(`Failed to fetch user with id ${userId} from database. Error: ${e}`);
-    ctx.throw(401, 'Unknown user');
+
+    throw Boom.unauthorized('Unknown user');
   }
 
   await next();
