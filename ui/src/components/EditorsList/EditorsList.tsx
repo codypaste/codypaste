@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "types/RootState";
 import { BiPlus } from "react-icons/bi";
 import { editorListStyles } from "config/styles";
-import { EditorBox } from "components/EditorsList/EditorBox";
+import EditorBox from "components/EditorsList/EditorBox";
 import { SmallHoverIconButton } from "components/common/HoverIconButton";
-import { RootState } from "types/RootState";
-import { getAllEditors } from "state/editors/selectors";
+import { getAllEditors, getActiveEditorId } from "state/editors/selectors";
 import { addEditor } from "state/editors/actions";
 import { Button } from "@chakra-ui/core";
 
@@ -39,7 +39,7 @@ const NoEditorsContainer = styled.div`
   flex-direction: column;
 `;
 
-const EditorList = ({ allEditors, addEditor }: Props) => {
+const EditorList = ({ allEditors, addEditor, activeEditorId }: Props) => {
   const handleAddMore = () => {
     addEditor({ title: "", type: "" });
   };
@@ -69,6 +69,7 @@ const EditorList = ({ allEditors, addEditor }: Props) => {
       {allEditors.map((editor) => {
         return (
           <EditorBox
+            isActive={activeEditorId === editor.id}
             key={editor.id}
             id={editor.id}
             title={editor.title}
@@ -84,6 +85,7 @@ const EditorList = ({ allEditors, addEditor }: Props) => {
 const mapState = (state: RootState) => {
   return {
     allEditors: getAllEditors(state),
+    activeEditorId: getActiveEditorId(state),
   };
 };
 const mapDispatch = {
