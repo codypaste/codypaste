@@ -42,7 +42,6 @@ export const EditorView = ({
   saveEditorContent,
 }: Props) => {
   const handleEditorContentSave = (id: string, content: string) => {
-    console.log(activeEditor);
     if (content !== activeEditor.content) {
       saveEditorContent({
         content,
