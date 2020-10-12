@@ -17,7 +17,6 @@ interface CodeEditorProps {
 }
 
 const CodeEditor = ({ content, id, onSave }: CodeEditorProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [codeMirrorInstance, setCodeMirrorInstance] = useState<
     CodeMirror.EditorFromTextArea
   >();
@@ -34,14 +33,14 @@ const CodeEditor = ({ content, id, onSave }: CodeEditorProps) => {
     }
   }, [codeMirrorInstance, id]);
 
-  // Set value its value
+  // Update its value
   useEffect(() => {
     if (codeMirrorInstance && content !== codeMirrorInstance.getValue()) {
       codeMirrorInstance.setValue(content);
     }
   }, [content, codeMirrorInstance, id]);
 
-  //
+  // Register and unregister event to save the value
   useEffect(() => {
     const handleSave = () => {
       if (!codeMirrorInstance) {
