@@ -5,7 +5,7 @@ import { Box, IconButton } from "@chakra-ui/core";
 import { BiCode, BiDotsHorizontalRounded, BiPen, BiText } from "react-icons/bi";
 import { EditorTypesType, EDITOR_TYPES } from "config/constants";
 import { IconType } from "react-icons/lib";
-import { EditorMenu } from "components/EditorsList/EditorMenu";
+import EditorMenu from "components/EditorsList/EditorMenu";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "types/RootState";
 import { setActiveEditor } from "state/editors/actions";
@@ -115,7 +115,7 @@ export const EditorBox = ({
           placement="right"
           interactive={true}
           arrow={true}
-          content={<EditorMenu />}
+          content={<EditorMenu editorId={id}/>}
           visible={visible}
           onClickOutside={hide}
         >

@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "types/RootState";
+import { BiPlus } from "react-icons/bi";
 import { editorListStyles } from "config/styles";
 import EditorBox from "components/EditorsList/EditorBox";
+import { SmallHoverIconButton } from "components/common/HoverIconButton";
 import { getAllEditors, getActiveEditorId } from "state/editors/selectors";
 import { addEditor } from "state/editors/actions";
 
@@ -14,8 +16,8 @@ const EditorListContainer = styled.div`
 
 const EditorListHeaderContainer = styled.div`
   display: grid;
-  grid-template: "title title" auto / 1fr auto;
-  padding-block-start: 0.5rem;
+  grid-template: "title action" auto / 1fr auto;
+  min-height: 40px;
 `;
 
 const EditorListTitle = styled.span`
@@ -26,11 +28,28 @@ const EditorListTitle = styled.span`
   padding-inline-start: 1rem;
 `;
 
+const AddMoreButton = styled(SmallHoverIconButton)`
+  align-self: center;
+`;
+
 const EditorList = ({ allEditors, addEditor, activeEditorId }: Props) => {
+  const handleAddMore = () => {
+    addEditor({ title: "", type: "" });
+  };
+
   return (
     <EditorListContainer>
       <EditorListHeaderContainer>
         <EditorListTitle>All your editors</EditorListTitle>
+        {allEditors.length > 0 && (
+          <AddMoreButton
+            aria-label="Add more"
+            icon={BiPlus}
+            variant="ghost"
+            variantColor="white"
+            onClick={handleAddMore}
+          ></AddMoreButton>
+        )}
       </EditorListHeaderContainer>
       {allEditors.map((editor) => {
         return (

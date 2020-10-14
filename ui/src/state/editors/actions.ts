@@ -3,6 +3,7 @@ import {
   EditorsActionTypes,
   SET_ACTIVE_EDITOR,
   SAVE_EDITOR_CONTENT,
+  REMOVE_EDITOR,
 } from "state/editors/types";
 import { AddEditorPayload } from "types/AddEditorPayload";
 import { SaveEditorContentPayloadType } from "types/SaveEditorContentPayloadType";
@@ -27,5 +28,12 @@ export const saveEditorContent = (
   return {
     type: SAVE_EDITOR_CONTENT,
     payload,
+  };
+};
+
+export const removeEditor = (editorId: string): EditorsActionTypes => {
+  return {
+    type: REMOVE_EDITOR,
+    payload: editorId,
   };
 };
