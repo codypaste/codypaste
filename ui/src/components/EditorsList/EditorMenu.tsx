@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "types/RootState";
+import { removeEditor } from "state/editors/actions";
 import { BiX, BiEdit } from "react-icons/bi";
 import { Button } from "@chakra-ui/core";
 
@@ -18,10 +21,14 @@ const CustomMenuButton = styled(Button)`
   }
 `;
 
-export const EditorMenu = () => {
+export const EditorMenu = ({ removeEditor, editorId }: Props) => {
+  const handleRemoval = () => {
+    removeEditor(editorId);
+  };
+
   return (
     <MenuContainer>
-      <CustomMenuButton leftIcon={BiX} variant="ghost">
+      <CustomMenuButton onClick={handleRemoval} leftIcon={BiX} variant="ghost">
         Remove
       </CustomMenuButton>
       <CustomMenuButton leftIcon={BiEdit} variant="ghost">
@@ -30,3 +37,17 @@ export const EditorMenu = () => {
     </MenuContainer>
   );
 };
+
+const mapState = (state: RootState) => {
+  return {};
+};
+const mapDispatch = {
+  removeEditor,
+};
+const connector = connect(mapState, mapDispatch);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type Props = PropsFromRedux & {
+  editorId: string;
+};
+
+export default connector(EditorMenu);

@@ -8,7 +8,6 @@ import EditorBox from "components/EditorsList/EditorBox";
 import { SmallHoverIconButton } from "components/common/HoverIconButton";
 import { getAllEditors, getActiveEditorId } from "state/editors/selectors";
 import { addEditor } from "state/editors/actions";
-import { Button } from "@chakra-ui/core";
 
 const EditorListContainer = styled.div`
   background-color: ${editorListStyles.backgroundColor};
@@ -18,6 +17,7 @@ const EditorListContainer = styled.div`
 const EditorListHeaderContainer = styled.div`
   display: grid;
   grid-template: "title action" auto / 1fr auto;
+  min-height: 40px;
 `;
 
 const EditorListTitle = styled.span`
@@ -32,39 +32,24 @@ const AddMoreButton = styled(SmallHoverIconButton)`
   align-self: center;
 `;
 
-const NoEditorsContainer = styled.div`
-  padding: 1rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-
 const EditorList = ({ allEditors, addEditor, activeEditorId }: Props) => {
   const handleAddMore = () => {
     addEditor({ title: "", type: "" });
-  };
-
-  const NoEditors = () => {
-    return (
-      <NoEditorsContainer>
-        <Button onClick={handleAddMore} variantColor="red">
-          Add editor
-        </Button>
-      </NoEditorsContainer>
-    );
   };
 
   return (
     <EditorListContainer>
       <EditorListHeaderContainer>
         <EditorListTitle>All your editors</EditorListTitle>
-        <AddMoreButton
-          aria-label="Add more"
-          icon={BiPlus}
-          variant="ghost"
-          variantColor="white"
-          onClick={handleAddMore}
-        ></AddMoreButton>
+        {allEditors.length > 0 && (
+          <AddMoreButton
+            aria-label="Add more"
+            icon={BiPlus}
+            variant="ghost"
+            variantColor="white"
+            onClick={handleAddMore}
+          ></AddMoreButton>
+        )}
       </EditorListHeaderContainer>
       {allEditors.map((editor) => {
         return (
@@ -77,7 +62,6 @@ const EditorList = ({ allEditors, addEditor, activeEditorId }: Props) => {
           ></EditorBox>
         );
       })}
-      {allEditors.length === 0 && <NoEditors></NoEditors>}
     </EditorListContainer>
   );
 };

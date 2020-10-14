@@ -8,6 +8,8 @@ import {
   SetActiveEditorType,
   SaveEditorContentType,
   SAVE_EDITOR_CONTENT,
+  REMOVE_EDITOR,
+  RemoveEditor,
 } from "state/editors/types";
 import { EDITOR_TYPES } from "config/constants";
 import { Editor } from "types/EditorType";
@@ -41,7 +43,9 @@ const handleAddEditor = (state: EditorsState, action: AddEditorActionType) => {
 };
 
 const setActiveEditor = (state: EditorsState, action: SetActiveEditorType) => {
-  state.activeEditorId = action.payload;
+  if (state.editorsIds.includes(action.payload)) {
+    state.activeEditorId = action.payload;
+  }
 };
 
 const hadleSaveEditorContent = (
@@ -49,6 +53,18 @@ const hadleSaveEditorContent = (
   action: SaveEditorContentType
 ) => {
   state.editorsMap[action.payload.editorId].content = action.payload.content;
+};
+
+const handleEditorRemoval = (
+  state: EditorsState,
+  action: RemoveEditor
+) => {
+  state.editorsIds = state.editorsIds.filter(id => id !== action.payload);
+  delete state.editorsMap[action.payload];
+
+  if (state.activeEditorId === action.payload) {
+    state.activeEditorId = state.editorsIds[0] || "";
+  }
 };
 
 export const editorsReducer = (
@@ -68,6 +84,9 @@ export const editorsReducer = (
     }
     case SAVE_EDITOR_CONTENT: {
       return produce(state, (draft) => hadleSaveEditorContent(draft, action));
+    }
+    case REMOVE_EDITOR: {
+      return produce(state, (draft) => handleEditorRemoval(draft, action));
     }
     default:
       return state;
