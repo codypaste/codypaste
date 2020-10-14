@@ -21,9 +21,8 @@ const CustomMenuButton = styled(Button)`
   }
 `;
 
-export const EditorMenu = ({removeEditor, editorId}: Props) => {
+export const EditorMenu = ({ removeEditor, editorId }: Props) => {
   const handleRemoval = () => {
-    console.log('dasdasda', editorId);
     removeEditor(editorId);
   };
 
@@ -43,7 +42,7 @@ const mapState = (state: RootState) => {
   return {};
 };
 const mapDispatch = {
-  removeEditor
+  removeEditor,
 };
 const connector = connect(mapState, mapDispatch);
 type PropsFromRedux = ConnectedProps<typeof connector>;
