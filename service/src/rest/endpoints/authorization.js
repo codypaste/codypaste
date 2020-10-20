@@ -21,6 +21,14 @@ const verifyJwt = async (ctx, next) => {
   return next();
 };
 
+/*
+  Example payload:
+  {
+    "username": "test_user",
+    "email": "test_user@examplemail.com",
+    "password": "some secret"
+  }
+*/
 const basicAuth = async (ctx, next) => {
   const { body: userData } = ctx.request;
 

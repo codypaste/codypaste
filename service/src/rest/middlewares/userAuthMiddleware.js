@@ -31,8 +31,9 @@ const getUserToken = (ctx) => {
 exports.userAuthMiddleware = async (ctx, next) => {
   const authToken = getUserToken(ctx);
 
-  if (!authToken) {
-    throw Boom.unauthorized('Missing authorization token');
+  if (!authToken) { // for not logged in user
+    logger.info('No token found for user');
+    return next();
   }
 
   let tokenData;
