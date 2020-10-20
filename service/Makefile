@@ -1,5 +1,8 @@
 start-env: 
 	docker-compose up -d
-	docker-compose run --rm codypaste_service /usr/src/app/initdb.sh
+	docker-compose run codypaste_service /usr/src/app/initdb.sh
 
-PHONY: start-env
+test: start-env
+	mocha tests/functional/**/*Tests.js
+
+PHONY: start-env test

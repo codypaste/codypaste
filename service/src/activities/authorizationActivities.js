@@ -30,14 +30,6 @@ module.exports = (usersDao) => {
     };
   };
 
-  /*
-    Example payload:
-    {
-      "username": "test_user",
-      "email": "test_user@examplemail.com",
-      "password": "some secret"
-    }
-  */
   const basicAuthorization = async (userData) => {
     const existingUser = await usersDao.getUser(
       { username: userData.username },

@@ -20,7 +20,7 @@ exports.up = function (knex) {
     .createTable(TABLES.GROUPS, (groupsTable) => {
       groupsTable.increments('groupId').primary();
       groupsTable.string('title', 60);
-      groupsTable.integer('author').unsigned().notNullable().references(`${TABLES.USERS}.userId`)
+      groupsTable.integer('author').unsigned().references(`${TABLES.USERS}.userId`)
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       groupsTable.string('password', 60);
