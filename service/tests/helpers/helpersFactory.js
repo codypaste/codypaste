@@ -1,13 +1,13 @@
 const { helpers } = require('./helpers');
 
-const host = () => 'http://0.0.0.0:3000';
+const host = 'localhost:8080';
 
 module.exports = {
-  get templateResourceHelpers() {
+  get groupsHelpers() {
     return helpers({
-      host: host(),
-      path: '/templateResource',
+      host,
+      path: '/groups',
       contentType: 'application/json',
     });
-  },
+  }
 };

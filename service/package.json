@@ -23,13 +23,13 @@
         "eslint-config-airbnb-base": "^13.2.0",
         "eslint-plugin-import": "^2.18.0",
         "eslint-plugin-mocha": "^5.3.0",
-        "mocha": "^6.1.4",
+        "mocha": "^6.2.3",
         "nodemon": "^1.19.4",
         "should": "^13.2.3",
         "supertest": "^4.0.2"
     },
     "scripts": {
-        "test": "mocha tests/**/*Tests.js",
+        "test": "mocha tests/functional/**/*Tests.js",
         "start": "nodemon index.js"
     },
     "author": "DirtyRedBombers",
