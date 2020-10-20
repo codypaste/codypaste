@@ -29,7 +29,7 @@
         "supertest": "^4.0.2"
     },
     "scripts": {
-        "test": "mocha tests/functional/**/*Tests.js",
+        "test": "make test",
         "start": "nodemon index.js"
     },
     "author": "DirtyRedBombers",
