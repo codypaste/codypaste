@@ -3,9 +3,8 @@ node_modules: package.json
 	
 start-env: node_modules
 	docker-compose up -d
-	docker-compose run codypaste_service npm install -g knex
-	docker-compose run codypaste_service npm install --save knex
-	docker-compose run codypaste_service npm install --save pg
+	docker-compose run codypaste_service npm install knex@0.21.1
+	docker-compose run codypaste_service npm install pg@8.0.3
 	docker-compose run codypaste_service /usr/src/app/initdb.sh
 
 test: start-env
