@@ -1,7 +1,5 @@
 node_modules: package.json
 	npm install --quiet
-	npm install knex --save
-	npm install pg
 	
 start-env: node_modules
 	docker-compose up -d
