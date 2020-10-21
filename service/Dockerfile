@@ -7,8 +7,6 @@ WORKDIR /usr/src/app
 ADD ./package.json /usr/src/app/package.json
 
 RUN npm install --quiet --production --no-progress --registry=${registry:-https://registry.npmjs.org} && npm cache clean --force
-RUN npm install knex
-RUN npm install pg
 
 ADD . /usr/src/app
 
