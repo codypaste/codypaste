@@ -7,7 +7,7 @@ import { editorListStyles } from "config/styles";
 import EditorBox from "components/EditorsList/EditorBox";
 import { SmallHoverIconButton } from "components/common/HoverIconButton";
 import { getAllEditors, getActiveEditorId } from "state/editors/selectors";
-import { addEditor } from "state/editors/actions";
+import { showNewEditorBoxes } from "state/editors/actions";
 
 const EditorListContainer = styled.div`
   background-color: ${editorListStyles.backgroundColor};
@@ -32,9 +32,13 @@ const AddMoreButton = styled(SmallHoverIconButton)`
   align-self: center;
 `;
 
-const EditorList = ({ allEditors, addEditor, activeEditorId }: Props) => {
+const EditorList = ({
+  allEditors,
+  showNewEditorBoxes,
+  activeEditorId,
+}: Props) => {
   const handleAddMore = () => {
-    addEditor({ title: "", type: "" });
+    showNewEditorBoxes();
   };
 
   return (
@@ -73,7 +77,7 @@ const mapState = (state: RootState) => {
   };
 };
 const mapDispatch = {
-  addEditor,
+  showNewEditorBoxes,
 };
 const connector = connect(mapState, mapDispatch);
 type PropsFromRedux = ConnectedProps<typeof connector>;
