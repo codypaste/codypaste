@@ -21,3 +21,7 @@ export const getActiveEditorId = (state: RootState): string => {
   const activeEditorId = state.editors.activeEditorId;
   return activeEditorId;
 };
+
+export const shouldShowNewEditorBoxes = (state: RootState): boolean => {
+  return state.editors.newEditorBoxesVisible;
+};

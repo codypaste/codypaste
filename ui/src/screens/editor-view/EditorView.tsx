@@ -5,7 +5,11 @@ import { DefaultPageWrapper } from "components/common/DefaultPageWrapper";
 import EditorList from "components/EditorsList/EditorsList";
 import { ShareCenter } from "components/ShareCenter/ShareCenter";
 import { EDITOR_TYPES } from "config/constants";
-import { hasAnyEditor, getActiveEditor } from "state/editors/selectors";
+import {
+  hasAnyEditor,
+  getActiveEditor,
+  shouldShowNewEditorBoxes,
+} from "state/editors/selectors";
 import { RootState } from "types/RootState";
 import { connect, ConnectedProps } from "react-redux";
 import NoEditorBoxes from "components/NoEditorsBoxes/NoEditorBoxes";
@@ -40,6 +44,7 @@ export const EditorView = ({
   hasAnyEditor,
   activeEditor,
   saveEditorContent,
+  shouldShowNewEditorBoxes,
 }: Props) => {
   const handleEditorContentSave = (id: string, content: string) => {
     if (content !== activeEditor.content) {
@@ -49,6 +54,11 @@ export const EditorView = ({
       });
     }
   };
+
+  const shouldShowEditor = () => {
+    return !shouldShowNewEditorBoxes && hasAnyEditor;
+  };
+
   return (
     <DefaultPageWrapper>
       <EditorViewContainer>
@@ -56,8 +66,8 @@ export const EditorView = ({
           <EditorList />
         </EditorsListContainer>
         <EditorContainer>
-          {!hasAnyEditor && <NoEditorBoxes />}
-          {hasAnyEditor && (
+          {shouldShowNewEditorBoxes && <NoEditorBoxes />}
+          {shouldShowEditor() && (
             <Suspense fallback={<div></div>}>
               {activeEditor.type === EDITOR_TYPES.CODE && (
                 <CodeEditor
@@ -81,6 +91,7 @@ const mapState = (state: RootState) => {
   return {
     hasAnyEditor: hasAnyEditor(state),
     activeEditor: getActiveEditor(state),
+    shouldShowNewEditorBoxes: shouldShowNewEditorBoxes(state),
   };
 };
 const mapDispatch = {
