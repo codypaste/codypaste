@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const config = require('config');
+const Boom = require('@hapi/boom');
 
 const hashPasswordIfApplicable = async (group) => {
   if (!group.password || group.password.length < 1) {
