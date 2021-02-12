@@ -65,6 +65,10 @@ const handleEditorRemoval = (state: EditorsState, action: RemoveEditor) => {
   state.editorsIds = state.editorsIds.filter((id) => id !== action.payload);
   delete state.editorsMap[action.payload];
 
+  if (state.editorsIds.length === 0) {
+    state.newEditorBoxesVisible = true;
+  }
+
   if (state.activeEditorId === action.payload) {
     state.activeEditorId = state.editorsIds[0] || "";
   }
