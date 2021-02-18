@@ -1,8 +1,10 @@
 import { createStore, combineReducers } from "redux";
 import { appReducer } from "state/app/reducer";
+import { editorsReducer } from "state/editors/reducer";
 
 const rootReducer = combineReducers({
   app: appReducer,
+  editors: editorsReducer,
 });
 
 export const store = createStore(
