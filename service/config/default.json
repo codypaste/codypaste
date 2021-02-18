@@ -1,16 +1,13 @@
 {
   "service": {
-    "port": 8080,
-    "jwtSecret": "3DCC69B872DE45D9C6872AE54F89FD1ED8BC1BF2AA59E67BC32AFAA97A63F692",
-    "saltRounds": 10
-  },
-  "database": {
-    "connectionString": "example_conn_string"
-  },
-  "facebook": {
-    "clientId": "",
-    "clientSecret": "",
-    "accessTokenApiUrl": "",
-    "userDataApi": ""
+    "host": "0.0.0.0",
+    "port": "8080",
+    "baseAppUrl": "",
+    "jwtSecret": "secret",
+    "logger": {
+      "instanceName": "codypaste-service",
+      "level": "debug",
+      "pretty": true
+    }
   }
 }

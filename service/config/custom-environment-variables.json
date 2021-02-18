@@ -1,0 +1,9 @@
+{
+  "service": {
+    "baseAppUrl": "BASE_APP_URL",
+    "port": "PORT",
+    "logger": {
+      "level": "LOG_LEVEL"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Codypaste Service",
+    "version": "0.1.0",
+    "title": "Codypaste Service"
+  },
+  "host": "localhost:8080",
+  "tags": [
+    {
+      "name": "metadata",
+      "description": "Authorization"
+    }
+  ],
+  "paths": {
+    "/build": {
+      "get": {
+        "tags": ["metadata"],
+        "summary": "Get Codypaste service metadata",
+        "description": "Used to fetch service build info",
+        "operationId": "getBuildInfo",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": ["metadata"],
+        "summary": "Get Codypaste service status",
+        "description": "Used to check if service is up and running",
+        "operationId": "getStatus",
+        "produces": ["application/xml", "application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
