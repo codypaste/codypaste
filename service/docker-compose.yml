@@ -1,16 +1,15 @@
-version: "3"
+version: '3.7'
 
 services:
   codypaste_service:
     build: .
-    ports:
-    - "3000:3000"
     environment:
-      ENVIRONMENT: development
-    volumes:
-    - ./logs:/usr/src/app/logs
-    - .:/usr/src/app
-    command: ["sh", "-c", "npm start"]
+      BASE_APP_URL: 'localhost:8080'
+      PG_HOST: 'postgres'
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres

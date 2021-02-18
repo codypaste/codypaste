@@ -1,0 +1,48 @@
+default:
+  image: node:14-alpine
+
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+  LATEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
+
+stages:
+  - install
+  - deploy-version
+  - test
+  - build
+  - publish-chart
+  - trigger-jenkins
+
+install:
+  stage: install
+  script:
+    - node -v
+    - npm -v
+    - npm ci
+  only:
+    changes:
+      - package-lock.json
+
+test:
+  stage: test
+  script:
+    - echo "Running tests"
+    # - npm run test
+  only:
+    - branches
+
+build:
+  stage: build
+  image: docker:git
+  services:
+    - docker:18-dind
+  variables:
+    DOCKER_DRIVER: overlay
+    DOCKER_HOST: tcp://localhost:2375
+  before_script:
+    - echo "$CI_BUILD_TOKEN" | docker login -u "$CI_BUILD_USER" "$CI_REGISTRY" --password-stdin
+  script:
+    - docker build -t $IMAGE_TAG --network host .
+    - docker push $IMAGE_TAG
+    - docker tag $IMAGE_TAG $LATEST_IMAGE
+    - docker push $LATEST_IMAGE
