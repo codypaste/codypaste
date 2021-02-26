@@ -3,9 +3,10 @@ import bodyParser from 'body-parser';
 import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 
-import authRouter from './routes/v1/auth';
-import metaRouter from './routes/meta';
-import apiDocs from './routes/apiDocs';
+import authRouter from './api/v1/auth';
+import notebooksRouter from './api/v1/notebooks';
+import metaRouter from './api/meta';
+import apiDocs from './api/apiDocs';
 
 import errorMiddleware from './middlewares/errorMiddleware';
 
@@ -19,6 +20,7 @@ export default (app: Express): Router => {
 
   // service resources api
   app.use('/api/v1', authRouter('/auth'));
+  app.use('/api/v1', notebooksRouter('/notebooks'));
 
   // error handling middlewares
   app.use((req, res, next) => {

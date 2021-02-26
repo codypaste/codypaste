@@ -1,16 +1,16 @@
 import Knex from 'knex';
-import { TABLES } from '../../database/postgres';
-import { IUser, IUserDTO } from '../entities/IUser';
+import { TABLES } from '../../../database/postgres';
+import { User, UserDTO } from '../types/User';
 
 export default class UsersRepository {
   constructor(private pgPool: Knex) {}
 
-  async findById(userId: number): Promise<IUser> {
+  async findById(userId: number): Promise<User> {
     const [user] = await this.pgPool.select().from(TABLES.USERS).where({ userId });
     return user;
   }
 
-  async insert(user: IUserDTO): Promise<number> {
+  async insert(user: UserDTO): Promise<number> {
     const [userId] = await this.pgPool
       .insert(
         {

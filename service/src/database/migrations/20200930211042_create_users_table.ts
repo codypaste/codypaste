@@ -1,9 +1,9 @@
 import Knex from 'knex';
 import { TABLES, pgClient } from '../postgres';
 
-exports.up = function (knex: Knex) {
+export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLES.USERS, (usersTable) => {
-    usersTable.increments('userId').primary();
+    usersTable.increments('userId').primary().unsigned();
     usersTable.bigInteger('authProviderId');
     usersTable.text('picture');
     usersTable.string('name', 60);
@@ -16,8 +16,8 @@ exports.up = function (knex: Knex) {
     usersTable.index('userId');
     usersTable.index('authProviderId');
   });
-};
+}
 
-exports.down = function (knex: Knex) {
+export async function down(knex: Knex): Promise<void> {
   return knex.schema.dropTable(TABLES.USERS);
-};
+}

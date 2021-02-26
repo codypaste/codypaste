@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import express from 'express';
 import initializeRestApi from './rest';
-import initializeResourceRepositories from './domain/repositories';
+import initializeResourceRepositories from './domain';
 import logger from './utils/logger';
 
 import config from 'config';
@@ -18,7 +18,7 @@ async function startService() {
     initializeResourceRepositories(pgClient);
   } catch (e) {
     logger.error(e, `Error connecting to postgres database`);
-    process.exit(1);
+    throw e;
   }
 
   initializeRestApi(app);
@@ -29,6 +29,6 @@ async function startService() {
 }
 
 startService().catch((e) => {
-  logger.error('Unexpected error: %o', e);
+  logger.error(e, 'Unexpected error');
   process.exit(1);
 });

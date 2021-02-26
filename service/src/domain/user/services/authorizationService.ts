@@ -2,11 +2,11 @@ import { Logger } from 'pino';
 import createError from 'http-errors';
 import { Inject, Service } from 'typedi';
 
-import UsersRepository from '../repositories/usersRepository';
-import { USERS_REPOSITORY, LOGGER } from '../../di-container/diTokens';
-import { IUser, IUserDTO } from '../entities/IUser';
+import UsersRepository from '../repository/usersRepository';
+import { USERS_REPOSITORY, LOGGER } from '../../../di-container/diTokens';
+import { User, UserDTO } from '../types/User';
 
-import { signJwt } from '../../utils/jwtUtils';
+import { signJwt } from '../../../utils/jwtUtils';
 
 @Service()
 export default class UsersService {
@@ -18,7 +18,7 @@ export default class UsersService {
     private usersRepository: UsersRepository
   ) {}
 
-  async getSingle(userId: number): Promise<IUser> {
+  async getSingle(userId: number): Promise<User> {
     const user = await this.usersRepository.findById(userId);
 
     if (!user) {
@@ -28,7 +28,7 @@ export default class UsersService {
     return user;
   }
 
-  async signIn(userData: IUserDTO): Promise<IUser> {
+  async signIn(userData: UserDTO): Promise<User> {
     const userId = await this.usersRepository.insert(userData);
     const user = Object.assign({}, userData, { userId });
     const token = signJwt(user);

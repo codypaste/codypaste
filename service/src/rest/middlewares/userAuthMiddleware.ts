@@ -6,7 +6,7 @@ import { verify } from '../../utils/jwtUtils';
 import authEnums from '../../enums/authorizationEnums';
 import Container from 'typedi';
 import logger from '../../utils/logger';
-import UsersService from '../../domain/services/authorizationService';
+import UsersService from '../../domain/user/services/authorizationService';
 
 const getUserToken = (req: Request) => {
   console.log(req.cookies);
@@ -30,7 +30,15 @@ const userAuthMiddleware = async (request: Request, response: Response, next: Ne
   const authToken = getUserToken(request);
 
   if (!authToken) {
-    return next(createError(401, 'Missing authorization token'));
+    response.locals.user = null;
+    /*
+     * TODO: it should be splitted into two other middlewares:
+     *   1: hard authorization returning 401 if token is missing (for protected routes)
+     *       -> return next(createError(401, 'Missing authorization token'));
+     *   2: letting requests without tokens in (required in some services)
+     *       -> return next();
+     */
+    return next();
   }
 
   let userId;

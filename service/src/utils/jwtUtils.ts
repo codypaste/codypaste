@@ -1,14 +1,13 @@
 import config from 'config';
 import jwt from 'jsonwebtoken';
-import { IUser } from '../domain/entities/IUser';
+import { User } from '../domain/user/types/User';
 
 const { jwtSecret } = config.get('service');
-
-export interface IUserTokenData {
+export interface UserTokenData {
   userId: number;
 }
 
-export const signJwt = (payload: IUser, options = {}): string =>
+export const signJwt = (payload: User, options = {}): string =>
   jwt.sign(
     {
       iat: Date.now(),
@@ -18,5 +17,5 @@ export const signJwt = (payload: IUser, options = {}): string =>
     options
   );
 
-export const verify = (token: string, options = {}): IUserTokenData =>
-  jwt.verify(token, jwtSecret, options) as IUserTokenData;
+export const verify = (token: string, options = {}): UserTokenData =>
+  jwt.verify(token, jwtSecret, options) as UserTokenData;

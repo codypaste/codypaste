@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 import Container from 'typedi';
 import asyncHandler from 'express-async-handler';
 
-import UsersService from '../../../domain/services/authorizationService';
+import UsersService from '../../../domain/user/services/authorizationService';
 import userAuthMiddleware from '../../middlewares/userAuthMiddleware';
 
 export default (prefix: string): Router => {

@@ -1,12 +1,12 @@
 // Temp basic auth user payload
-export interface IUserDTO {
+export interface UserDTO {
   firstName: string;
   lastName: string;
   email: string;
   id: string;
 }
 
-export interface IUser {
+export interface User {
   userId: number;
   authProviderId?: number;
   picture?: string;

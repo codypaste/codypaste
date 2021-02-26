@@ -9,6 +9,7 @@ const environment = process.env.ENVIRONMENT === 'production' ? 'production' : 'd
 export const pgClient = knex(knexconfig[environment]);
 export const TABLES = {
   USERS: 'users',
+  NOTEBOOKS: 'notebooks',
 };
 
 interface PostgresConnectionProvider {
