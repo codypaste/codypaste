@@ -1,6 +1,6 @@
 import config from 'config';
 import jwt from 'jsonwebtoken';
-import { User } from '../domain/user/types/User';
+import { User } from '../domain/user/entities/User';
 
 const { jwtSecret } = config.get('service');
 export interface UserTokenData {

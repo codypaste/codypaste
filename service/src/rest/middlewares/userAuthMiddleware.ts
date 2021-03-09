@@ -56,7 +56,7 @@ const userAuthMiddleware = async (request: Request, response: Response, next: Ne
     logger.info(`Successfully authorized user with id %s`, userId);
     response.locals.user = authorizedUser;
 
-    next();
+    return next();
   } catch (e) {
     logger.error(`Failed to fetch user with id %s from database. Error: %o`, userId, e);
     return next(createError(401, 'Unknown user'));

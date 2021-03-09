@@ -1,6 +1,6 @@
 import Knex from 'knex';
 import { TABLES } from '../../../database/postgres';
-import { User, UserDTO } from '../types/User';
+import { User, UserDTO } from '../entities/User';
 
 export default class UsersRepository {
   constructor(private pgPool: Knex) {}

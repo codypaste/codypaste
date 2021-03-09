@@ -4,7 +4,7 @@ import { Inject, Service } from 'typedi';
 
 import UsersRepository from '../repository/usersRepository';
 import { USERS_REPOSITORY, LOGGER } from '../../../di-container/diTokens';
-import { User, UserDTO } from '../types/User';
+import { User, UserDTO } from '../entities/User';
 
 import { signJwt } from '../../../utils/jwtUtils';
 
