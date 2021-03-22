@@ -1,8 +1,8 @@
 import { Notebook, NotebookInputDTO } from '../entities/Notebook';
-import { ResourceRepository } from '../repository/repository.types';
+import { NotebookResourceRepository } from '../repository/notebooksRepository.types';
 import NotebooksService from '../services/notebooks.service';
 
-class MockRepository implements ResourceRepository {
+class MockRepository implements NotebookResourceRepository {
   constructor(private storage: Array<Notebook> = []) {}
 
   async insert(notebook: Notebook): Promise<string> {
@@ -24,7 +24,7 @@ class MockRepository implements ResourceRepository {
 }
 
 describe('Notebooks service tests', () => {
-  let mockedRepository: ResourceRepository;
+  let mockedRepository: NotebookResourceRepository;
   let notebooksService: NotebooksService;
   beforeAll(() => {
     mockedRepository = new MockRepository();

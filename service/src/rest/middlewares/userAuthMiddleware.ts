@@ -6,7 +6,7 @@ import { verify } from '../../utils/jwtUtils';
 import authEnums from '../../enums/authorizationEnums';
 import Container from 'typedi';
 import logger from '../../utils/logger';
-import UsersService from '../../domain/user/services/authorizationService';
+import UsersService from '../../domain/user/services/authorization.service';
 
 const getUserToken = (req: Request) => {
   console.log(req.cookies);

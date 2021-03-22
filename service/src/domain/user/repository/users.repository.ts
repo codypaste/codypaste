@@ -1,8 +1,9 @@
 import Knex from 'knex';
 import { TABLES } from '../../../database/postgres';
 import { User, UserDTO } from '../entities/User';
+import { UserResourceRepository } from './usersRepository.types';
 
-export default class UsersRepository {
+export default class UsersRepository implements UserResourceRepository {
   constructor(private pgPool: Knex) {}
 
   async findById(userId: number): Promise<User> {

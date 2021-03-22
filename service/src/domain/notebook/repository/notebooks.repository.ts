@@ -1,9 +1,9 @@
 import Knex from 'knex';
 import { TABLES } from '../../../database/postgres';
 import { Notebook, NotebookMapper, NotebookModel } from '../entities/Notebook';
-import { ResourceRepository } from './repository.types';
+import { NotebookResourceRepository } from './notebooksRepository.types';
 
-export default class NotebooksRepository implements ResourceRepository {
+export default class NotebooksRepository implements NotebookResourceRepository {
   constructor(private pgPool: Knex) {}
 
   async insert(notebook: Notebook): Promise<string> {

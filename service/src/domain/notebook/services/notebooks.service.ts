@@ -6,13 +6,13 @@ import { notebookValidationSchema } from '../../validation-schemas/notebook';
 import logger from '../../../utils/logger';
 import createHttpError from 'http-errors';
 
-import { ResourceRepository } from '../repository/repository.types';
+import { NotebookResourceRepository } from '../repository/notebooksRepository.types';
 
 @Service()
 export default class NotebooksService {
   constructor(
     @Inject(NOTEBOOKS_REPOSITORY)
-    private notebooksRepository: ResourceRepository
+    private notebooksRepository: NotebookResourceRepository
   ) {}
 
   async create(payload: NotebookInputDTO, authorId: number): Promise<string> {

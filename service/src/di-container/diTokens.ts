@@ -1,6 +1,6 @@
 import { Logger } from 'pino';
 import { Token } from 'typedi';
-import UsersRepository from '../domain/user/repository/usersRepository';
+import UsersRepository from '../domain/user/repository/users.repository';
 import NotebooksRepository from '../domain/notebook/repository/notebooks.repository';
 
 export const LOGGER = new Token<Logger>('logger');
