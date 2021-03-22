@@ -3,7 +3,7 @@ import Container from 'typedi';
 import asyncHandler from 'express-async-handler';
 
 import userAuthMiddleware from '../../middlewares/userAuthMiddleware';
-import NotebooksService from '../../../domain/notebook/services/notebooksService';
+import NotebooksService from '../../../domain/notebook/services/notebooks.service';
 import logger from '../../../utils/logger';
 import createHttpError from 'http-errors';
 

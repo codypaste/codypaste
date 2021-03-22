@@ -1,14 +1,15 @@
 import Knex from 'knex';
 import { TABLES } from '../../../database/postgres';
 import { Notebook, NotebookMapper, NotebookModel } from '../entities/Notebook';
+import { ResourceRepository } from './repository.types';
 
-export default class NotebooksRepository {
+export default class NotebooksRepository implements ResourceRepository {
   constructor(private pgPool: Knex) {}
 
-  async insert(notebook: Notebook): Promise<number> {
-    const [notebookId] = await this.pgPool.insert(notebook, 'publicId').into(TABLES.NOTEBOOKS);
+  async insert(notebook: Notebook): Promise<string> {
+    const [notebookPublicId] = await this.pgPool.insert(notebook, 'publicId').into(TABLES.NOTEBOOKS);
 
-    return notebookId;
+    return notebookPublicId;
   }
 
   async getSingle(notebookPublicId: string): Promise<Notebook | null> {

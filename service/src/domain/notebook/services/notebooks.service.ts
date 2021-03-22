@@ -1,26 +1,22 @@
-import { Logger } from 'pino';
 import { Inject, Service } from 'typedi';
 
-import { LOGGER, NOTEBOOKS_REPOSITORY } from '../../../di-container/diTokens';
+import { NOTEBOOKS_REPOSITORY } from '../../../di-container/diTokens';
 import { Notebook, NotebookInputDTO, NotebookMapper } from '../entities/Notebook';
 import { notebookValidationSchema } from '../../validation-schemas/notebook';
-import NotebooksRepository from '../repository/notebooksRepository';
 import logger from '../../../utils/logger';
 import createHttpError from 'http-errors';
+
+import { ResourceRepository } from '../repository/repository.types';
 
 @Service()
 export default class NotebooksService {
   constructor(
-    @Inject(LOGGER)
-    private logger: Logger,
-
     @Inject(NOTEBOOKS_REPOSITORY)
-    private notebooksRepository: NotebooksRepository
+    private notebooksRepository: ResourceRepository
   ) {}
 
-  async create(payload: NotebookInputDTO, authorId: number): Promise<number> {
+  async create(payload: NotebookInputDTO, authorId: number): Promise<string> {
     await notebookValidationSchema.validateAsync(payload);
-    // TODO: add unique id re-generation on 'publicId' constraint error
     const notebook = await NotebookMapper.fromInputPayload(payload, authorId);
     logger.debug('Saving notebook %o', notebook);
 
